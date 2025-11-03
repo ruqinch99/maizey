@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: maizey_db
+    environment:
+      POSTGRES_DB: ${DJANGO_DB_NAME:-maizey}
+      POSTGRES_USER: ${DJANGO_DB_USER:-maizey_user}
+      POSTGRES_PASSWORD: ${DJANGO_DB_PASSWORD:-maizey_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432" # Mapped to 5434 to avoid conflict with local PostgreSQL on 5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DJANGO_DB_USER:-maizey_user} -d ${DJANGO_DB_NAME:-maizey}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: maizey_app
+    environment:
+      - DJANGO_DB_ENGINE=django.db.backends.postgresql
+      - DJANGO_DB_NAME=${DJANGO_DB_NAME:-maizey}
+      - DJANGO_DB_USER=${DJANGO_DB_USER:-maizey_user}
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD:-maizey_password}
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=5432
+      - SECRET_KEY=${SECRET_KEY:-django-insecure-d6i(q2+w4!nnu$v!d=+5#g)ry_q6pzl8conmq(n6i!=^#(-$nv}
+      - DEBUG=${DEBUG:-True}
+      - MAIZEY_API_TOKEN=${MAIZEY_API_TOKEN}
+      - MAIZEY_PROJECT_PK=${MAIZEY_PROJECT_PK}
+      - MAIZEY_API_BASE_URL=${MAIZEY_API_BASE_URL:-https://umgpt.umich.edu/maizey/api}
+    ports:
+      - "5173:5173"  # Vite dev server
+      - "8000:8000"  # Django API
+    volumes:
+      - ./backend:/app/backend  # Hot reload for backend
+      - ./frontend:/app/frontend  # Hot reload for frontend
+      - /app/frontend/node_modules  # Named volume to preserve node_modules
+      - /var/log/django:/var/log/django
+      - /var/log/vite:/var/log/vite
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  node_modules:  # Named volume for node_modules

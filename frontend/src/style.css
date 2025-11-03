@@ -1,0 +1,220 @@
+@import 'tailwindcss';
+
+/* Chat History Panel */
+.chat-history-panel {
+  @apply flex flex-col h-screen w-64 bg-white border-r border-gray-200;
+}
+
+.chat-history-panel__header {
+  @apply px-4 py-3 border-b border-gray-200 bg-white;
+  @apply flex items-center;
+  height: 60px;
+}
+
+.chat-history-panel__new-chat-button {
+  @apply w-full px-4 py-2 bg-blue-500 text-white rounded-lg;
+  @apply hover:bg-blue-600 disabled:opacity-50 font-medium;
+}
+
+.chat-history-panel__content {
+  @apply flex-1 overflow-y-auto;
+}
+
+.chat-history-panel__loading {
+  @apply p-6 text-center text-gray-500 text-sm;
+}
+
+.chat-history-panel__empty {
+  @apply p-6 text-center text-gray-500 text-sm;
+}
+
+.chat-history-panel__list {
+}
+
+.chat-history-panel__item {
+  @apply w-full text-left p-4 hover:bg-gray-50 transition-colors;
+}
+
+.chat-history-panel__item--active {
+  @apply bg-blue-50 border-l-4 border-blue-600;
+}
+
+.chat-history-panel__title {
+  @apply font-medium text-gray-900 truncate mb-1;
+}
+
+.chat-history-panel__title-edit {
+  @apply w-full px-2 py-1 text-sm font-medium border border-blue-500 rounded;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* Chat Interface */
+.chat-interface {
+  @apply flex h-screen bg-gray-50;
+}
+
+.chat-interface__main {
+  @apply flex-1 flex flex-col;
+}
+
+.chat-interface__header {
+  @apply bg-blue-600 text-white px-4 py-3;
+  @apply flex items-center;
+  height: 60px;
+  border-bottom: 1px solid rgb(229 231 235);
+}
+
+.chat-interface__header-title {
+  @apply text-lg font-bold;
+}
+
+.chat-interface__header-subtitle {
+  @apply text-sm opacity-90;
+}
+
+.chat-interface__error {
+  @apply bg-red-100 border-b border-red-400 text-red-700 px-4 py-3;
+}
+
+/* Message List */
+.message-list {
+  @apply flex-1 overflow-y-auto p-4 space-y-4;
+}
+
+.message-list__empty {
+  @apply text-center text-gray-500 mt-8;
+}
+
+.message-list__item {
+  @apply flex;
+}
+
+.message-list__item--user {
+  @apply justify-end;
+}
+
+.message-list__item--bot {
+  @apply justify-start;
+}
+
+.message-list__message {
+  @apply max-w-[80%] rounded-lg px-4 py-2;
+}
+
+.message-list__message--user {
+  @apply bg-blue-500 text-white;
+}
+
+.message-list__message--bot {
+  @apply bg-gray-200 text-gray-800;
+}
+
+.message-list__text {
+  @apply break-words;
+}
+
+/* Markdown Content Styling */
+.markdown-content {
+  white-space: normal;
+}
+
+.markdown-content p:empty {
+  display: none;
+}
+
+.markdown-content p + p {
+  @apply mt-0;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  @apply font-bold mt-4 mb-2;
+}
+
+.markdown-content h1 {
+  @apply text-2xl;
+}
+.markdown-content h2 {
+  @apply text-xl;
+}
+
+.markdown-content h3 {
+  @apply text-lg;
+}
+
+.markdown-content p {
+  @apply mb-2;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  @apply mb-2 ml-4;
+  list-style-position: outside;
+}
+
+.markdown-content ul {
+  list-style-type: disc;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+}
+
+.markdown-content li {
+  @apply mb-1 pl-2;
+}
+
+.markdown-content a {
+  @apply text-blue-600 underline;
+  @apply hover:text-blue-800;
+}
+
+.markdown-content code {
+  @apply bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800;
+}
+
+.markdown-content pre {
+  @apply bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4 mt-2;
+  @apply border border-gray-300;
+}
+
+.markdown-content pre code {
+  @apply bg-transparent p-0 text-gray-800;
+  @apply whitespace-pre;
+}
+
+.markdown-content strong {
+  @apply font-bold;
+}
+
+.markdown-content em {
+  @apply italic;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic my-2;
+  @apply bg-gray-50 py-2;
+}
+
+/* Message Input */
+.message-input {
+  @apply p-4 border-t border-gray-200 bg-white;
+}
+
+.message-input__form {
+  @apply flex gap-2;
+}
+
+.message-input__field {
+  @apply flex-1 px-4 py-2 border border-gray-300 rounded-lg;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50;
+}
+
+.message-input__button {
+  @apply px-6 py-2 bg-blue-500 text-white rounded-lg;
+  @apply hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed;
+}
