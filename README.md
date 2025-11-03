@@ -39,7 +39,7 @@ A full-stack chat application that interfaces with the Maizey API, built with Dj
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/ruqinch99/maizey.git
 cd maizey
 ```
 
